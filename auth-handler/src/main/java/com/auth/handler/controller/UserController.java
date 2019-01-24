@@ -8,7 +8,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +22,6 @@ public class UserController {
 	
 	@PostMapping("/finduser")
 	public String findUser(@RequestHeader("Authorization") String auth) {
-	
 		
 		User user = (User)tokenStore.readAuthentication(auth.split(" ")[1]).getPrincipal();
 		return user.getUsername() + ":" + user.getPassword();
@@ -32,7 +30,6 @@ public class UserController {
 	@PostMapping("/getuser")
 	public String getUser(Authentication auth) {
 	
-		
 		StringBuilder sb = new StringBuilder();
 		String userName = auth.getName();
 		sb.append("用户姓名：" + userName);
